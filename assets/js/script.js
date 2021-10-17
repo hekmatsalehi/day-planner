@@ -7,13 +7,13 @@
 // Save the input of each timeblock in localstorage
 
 
-
-$(document).ready(function () {
-
-  // Get the today's date
-  var today = moment().format("dddd, MMMM Do YYYY");
-  $("#currentDay").text(today);
-
+  // Get the today's date and time
+  function displayDateTime(){
+     var today = moment().format("dddd, MMMM Do YYYY [at] hh:mm:ss a");
+     $("#currentDay").text(today);
+  }
+  
+  // Save the user input
   $(".saveBtn").on("click", function () {
     var time = $(this).parent().attr("id");
     var text = $(this).siblings(".description").val();
@@ -30,6 +30,25 @@ $(document).ready(function () {
   $("#15 .description").val(localStorage.getItem("15"));
   $("#16 .description").val(localStorage.getItem("16"));
   $("#17 .description").val(localStorage.getItem("17"));
+  
+  // clear the user input
+  $(".clearBtn").on("click", function () {
+    var time = $(this).parent().attr("id");
+    var text = $(this).siblings(".description").val();
+
+    localStorage.removeItem(time, text);
+
+    $("#9 .description").val(localStorage.getItem("9"));
+    $("#10 .description").val(localStorage.getItem("10"));
+    $("#11 .description").val(localStorage.getItem("11"));
+    $("#12 .description").val(localStorage.getItem("12"));
+    $("#13 .description").val(localStorage.getItem("13"));
+    $("#14 .description").val(localStorage.getItem("14"));
+    $("#15 .description").val(localStorage.getItem("15"));
+    $("#16 .description").val(localStorage.getItem("16"));
+    $("#17 .description").val(localStorage.getItem("17"));
+  });
+  
 
   function colorCode() {
     var currentHour = moment().hour();
@@ -55,5 +74,6 @@ $(document).ready(function () {
   }
 
   colorCode();
-});
+  setInterval(displayDateTime, 1000)
+
 
