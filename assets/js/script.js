@@ -6,9 +6,11 @@
 // Make each timeblock to take an input
 // Save the input of each timeblock in localstorage
 
-// Get the today's date
+
 
 $(document).ready(function () {
+
+  // Get the today's date
   var today = moment().format("dddd, MMMM Do YYYY");
   $("#currentDay").text(today);
 
@@ -32,15 +34,19 @@ $(document).ready(function () {
   function colorCode() {
     var currentHour = moment().hour();
 
-    $(".time-block").each(function () {
+    var timeBlock = $(".time-block")
+    timeBlock.each(function () {
       var blockHour = parseInt($(this).attr("id"));
-
       if (currentHour > blockHour) {
+        // $(this) refer to the timeBlock with condition currentHour > blockHour
         $(this).children(".description").addClass("past");
+        
       } else if (currentHour === blockHour) {
+        // $(this) refer to the timeBlock with condition currentHour === blockHour
         $(this).children(".description").removeClass("past");
         $(this).children(".description").addClass("present");
       } else {
+        // $(this) refer to future timeBlock
         $(this).children(".description").removeClass("past");
         $(this).children(".description").removeClass("present");
         $(this).children(".description").addClass("future");
